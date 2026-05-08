@@ -1,11 +1,14 @@
+// 日语四级词汇大全
 export interface Word {
   kanji: string;
   kana: string;
   meaning: string;
 }
 
-export const vocabulary: Word[] = [
-  // 🕐 时间类
+// ========== 名词 ==========
+
+// 时间类
+export const timeWords: Word[] = [
   { kanji: '朝', kana: 'あさ', meaning: '早晨、早上' },
   { kanji: '明日', kana: 'あした', meaning: '明天' },
   { kanji: '明後日', kana: 'あさって', meaning: '后天' },
@@ -25,8 +28,36 @@ export const vocabulary: Word[] = [
   { kanji: '夏', kana: 'なつ', meaning: '夏天' },
   { kanji: '秋', kana: 'あき', meaning: '秋天' },
   { kanji: '冬', kana: 'ふゆ', meaning: '冬天' },
+  { kanji: '今年', kana: 'ことし', meaning: '今年' },
+  { kanji: '去年', kana: 'きょねん', meaning: '去年' },
+  { kanji: '来年', kana: 'らいねん', meaning: '明年' },
+  { kanji: '今月', kana: 'こんげつ', meaning: '本月' },
+  { kanji: '先月', kana: 'せんげつ', meaning: '上月' },
+  { kanji: '来月', kana: 'らいげつ', meaning: '下月' },
+  { kanji: '今週', kana: 'こんしゅう', meaning: '本周' },
+  { kanji: '先週', kana: 'せんしゅう', meaning: '上周' },
+  { kanji: '来週', kana: 'らいしゅう', meaning: '下周' },
+  { kanji: '毎日', kana: 'まいにち', meaning: '每天' },
+  { kanji: '毎週', kana: 'まいしゅう', meaning: '每周' },
+  { kanji: '毎月', kana: 'まいげつ', meaning: '每月' },
+  { kanji: '毎年', kana: 'まいねん', meaning: '每年' },
+  { kanji: '一日', kana: 'ついたち', meaning: '1号' },
+  { kanji: '一日', kana: 'いちにち', meaning: '一天' },
+  { kanji: '二日', kana: 'ふつか', meaning: '两天/2号' },
+  { kanji: '三日', kana: 'みっか', meaning: '三天/3号' },
+  { kanji: '四日', kana: 'よっか', meaning: '四天/4号' },
+  { kanji: '五日', kana: 'いつか', meaning: '五天/5号' },
+  { kanji: '六日', kana: 'むいか', meaning: '六天/6号' },
+  { kanji: '七日', kana: 'なのか', meaning: '七天/7号' },
+  { kanji: '八日', kana: 'ようか', meaning: '八天/8号' },
+  { kanji: '九日', kana: 'ここのか', meaning: '九天/9号' },
+  { kanji: '十日', kana: 'とおか', meaning: '十天/10号' },
+  { kanji: '二十日', kana: 'はつか', meaning: '20号' },
+  { kanji: '時々', kana: 'ときどき', meaning: '有时、时常' },
+];
 
-  // 星期
+// 星期
+export const weekWords: Word[] = [
   { kanji: '月曜日', kana: 'げつようび', meaning: '星期一' },
   { kanji: '火曜日', kana: 'かようび', meaning: '星期二' },
   { kanji: '水曜日', kana: 'すいようび', meaning: '星期三' },
@@ -34,90 +65,705 @@ export const vocabulary: Word[] = [
   { kanji: '金曜日', kana: 'きんようび', meaning: '星期五' },
   { kanji: '土曜日', kana: 'どようび', meaning: '星期六' },
   { kanji: '日曜日', kana: 'にちようび', meaning: '星期日' },
+  { kanji: '週末', kana: 'しゅうまつ', meaning: '周末' },
+];
 
-  // 📍 地点/场所类
-  { kanji: '家', kana: 'うち', meaning: '房子、家庭' }, // Using うち as it's common for our reading
+// 地点/场所类
+export const placeWords: Word[] = [
+  { kanji: '家', kana: 'いえ', meaning: '房子、家庭' },
+  { kanji: '家', kana: 'うち', meaning: '家' },
+  { kanji: 'アパート', kana: 'アパート', meaning: '公寓' },
   { kanji: '学校', kana: 'がっこう', meaning: '学校' },
   { kanji: '大学', kana: 'だいがく', meaning: '大学' },
   { kanji: '教室', kana: 'きょうしつ', meaning: '教室' },
   { kanji: '図書館', kana: 'としょかん', meaning: '图书馆' },
   { kanji: '駅', kana: 'えき', meaning: '车站' },
   { kanji: '地下鉄', kana: 'ちかてつ', meaning: '地铁' },
+  { kanji: 'バス', kana: 'バス', meaning: '公共汽车' },
   { kanji: '公園', kana: 'こうえん', meaning: '公园' },
   { kanji: '銀行', kana: 'ぎんこう', meaning: '银行' },
+  { kanji: '郵便局', kana: 'ゆうびんきょく', meaning: '邮局' },
   { kanji: '病院', kana: 'びょういん', meaning: '医院' },
   { kanji: '映画館', kana: 'えいがかん', meaning: '电影院' },
+  { kanji: 'デパート', kana: 'デパート', meaning: '百货公司' },
+  { kanji: 'スーパー', kana: 'スーパー', meaning: '超市' },
+  { kanji: 'コンビニ', kana: 'コンビニ', meaning: '便利店' },
+  { kanji: 'レストラン', kana: 'レストラン', meaning: '餐厅' },
+  { kanji: '喫茶店', kana: 'きっさてん', meaning: '咖啡店' },
+  { kanji: 'ホテル', kana: 'ホテル', meaning: '旅馆' },
+  { kanji: '交番', kana: 'こうばん', meaning: '派出所' },
+  { kanji: '玄関', kana: 'げんかん', meaning: '门口、玄关' },
+  { kanji: '台所', kana: 'だいどころ', meaning: '厨房' },
   { kanji: '部屋', kana: 'へや', meaning: '房间' },
+  { kanji: '廊下', kana: 'ろうか', meaning: '走廊' },
+  { kanji: '庭', kana: 'にわ', meaning: '院子' },
+  { kanji: '窓', kana: 'まど', meaning: '窗户' },
+  { kanji: '入口', kana: 'いりぐち', meaning: '入口' },
+  { kanji: '出口', kana: 'でぐち', meaning: '出口' },
+  { kanji: '上', kana: 'うえ', meaning: '上面' },
+  { kanji: '下', kana: 'した', meaning: '下面' },
+  { kanji: '前', kana: 'まえ', meaning: '前面' },
+  { kanji: '後ろ', kana: 'うしろ', meaning: '后面' },
+  { kanji: '左', kana: 'ひだり', meaning: '左边' },
+  { kanji: '右', kana: 'みぎ', meaning: '右边' },
+  { kanji: '東', kana: 'ひがし', meaning: '东' },
+  { kanji: '西', kana: 'にし', meaning: '西' },
+  { kanji: '南', kana: 'みなみ', meaning: '南' },
+  { kanji: '北', kana: 'きた', meaning: '北' },
+  { kanji: '中', kana: 'なか', meaning: '里面' },
+  { kanji: '外', kana: 'そと', meaning: '外面' },
+  { kanji: '隣', kana: 'となり', meaning: '旁边' },
+  { kanji: '側', kana: 'そば', meaning: '附近' },
+  { kanji: 'ここ', kana: 'ここ', meaning: '这里' },
+  { kanji: 'そこ', kana: 'そこ', meaning: '那里' },
+  { kanji: 'あそこ', kana: 'あそこ', meaning: '那边' },
+  { kanji: 'どこ', kana: 'どこ', meaning: '哪里' },
+];
 
-  // 👥 人物/称呼类
+// 人物/称呼类
+export const personWords: Word[] = [
   { kanji: '私', kana: 'わたし', meaning: '我' },
+  { kanji: '私', kana: 'わたくし', meaning: '我(谦逊)' },
   { kanji: '貴方', kana: 'あなた', meaning: '你' },
   { kanji: '彼', kana: 'かれ', meaning: '他' },
   { kanji: '彼女', kana: 'かのじょ', meaning: '她' },
   { kanji: '父', kana: 'ちち', meaning: '父亲(自称)' },
   { kanji: '母', kana: 'はは', meaning: '母亲(自称)' },
+  { kanji: 'お父さん', kana: 'おとうさん', meaning: '爸爸(称呼)' },
+  { kanji: 'お母さん', kana: 'おかあさん', meaning: '妈妈(称呼)' },
+  { kanji: '兄', kana: 'あに', meaning: '哥哥(自称)' },
+  { kanji: '姉', kana: 'あね', meaning: '姐姐(自称)' },
+  { kanji: 'お兄さん', kana: 'おにいさん', meaning: '哥哥(称呼)' },
+  { kanji: 'お姉さん', kana: 'おねえさん', meaning: '姐姐(称呼)' },
+  { kanji: '弟', kana: 'おとうと', meaning: '弟弟' },
+  { kanji: '妹', kana: 'いもうと', meaning: '妹妹' },
+  { kanji: '祖父', kana: 'そふ', meaning: '祖父(自称)' },
+  { kanji: '祖母', kana: 'そぼ', meaning: '祖母(自称)' },
+  { kanji: 'お爺さん', kana: 'おじいさん', meaning: '爷爷(称呼)' },
+  { kanji: 'お婆さん', kana: 'おばあさん', meaning: '奶奶(称呼)' },
+  { kanji: '叔父', kana: 'おじ', meaning: '叔父' },
+  { kanji: '叔母', kana: 'おば', meaning: '叔母' },
+  { kanji: '子供', kana: 'こども', meaning: '孩子' },
+  { kanji: '男', kana: 'おとこ', meaning: '男子' },
+  { kanji: '女', kana: 'おんな', meaning: '女子' },
+  { kanji: '男の子', kana: 'おとこのこ', meaning: '男孩' },
+  { kanji: '女の子', kana: 'おんなのこ', meaning: '女孩' },
+  { kanji: '大人', kana: 'おとな', meaning: '大人' },
   { kanji: '友達', kana: 'ともだち', meaning: '朋友' },
   { kanji: '家族', kana: 'かぞく', meaning: '家人' },
+  { kanji: '兄弟', kana: 'きょうだい', meaning: '兄弟' },
+  { kanji: '両親', kana: 'りょうしん', meaning: '父母' },
   { kanji: '先生', kana: 'せんせい', meaning: '老师' },
   { kanji: '学生', kana: 'がくせい', meaning: '学生' },
+  { kanji: '生徒', kana: 'せいと', meaning: '学生' },
   { kanji: '医者', kana: 'いしゃ', meaning: '医生' },
+  { kanji: '警官', kana: 'けいかん', meaning: '警察' },
+  { kanji: '外国人', kana: 'がいこくじん', meaning: '外国人' },
+  { kanji: '留学生', kana: 'りゅうがくせい', meaning: '留学生' },
   { kanji: '誰', kana: 'だれ', meaning: '谁' },
+  { kanji: 'どなた', kana: 'どなた', meaning: '哪位(敬语)' },
+  { kanji: '皆さん', kana: 'みなさん', meaning: '各位、大家' },
+  { kanji: '方', kana: 'かた', meaning: '位(敬语)' },
+  { kanji: '人', kana: 'ひと', meaning: '人' },
+  { kanji: '自分', kana: 'じぶん', meaning: '自己' },
+];
 
-  // 🍜 食物/饮料类
+// 食物/饮料类
+export const foodWords: Word[] = [
   { kanji: '朝御飯', kana: 'あさごはん', meaning: '早餐' },
   { kanji: '昼御飯', kana: 'ひるごはん', meaning: '午餐' },
   { kanji: '晩御飯', kana: 'ばんごはん', meaning: '晚餐' },
   { kanji: '御飯', kana: 'ごはん', meaning: '米饭' },
+  { kanji: 'パン', kana: 'パン', meaning: '面包' },
   { kanji: '卵', kana: 'たまご', meaning: '鸡蛋' },
   { kanji: '魚', kana: 'さかな', meaning: '鱼' },
   { kanji: '肉', kana: 'にく', meaning: '肉' },
+  { kanji: '牛肉', kana: 'ぎゅうにく', meaning: '牛肉' },
+  { kanji: '豚肉', kana: 'ぶたにく', meaning: '猪肉' },
+  { kanji: '鶏肉', kana: 'とりにく', meaning: '鸡肉' },
   { kanji: '野菜', kana: 'やさい', meaning: '蔬菜' },
   { kanji: '果物', kana: 'くだもの', meaning: '水果' },
+  { kanji: 'お菓子', kana: 'おかし', meaning: '点心、零食' },
+  { kanji: '飴', kana: 'あめ', meaning: '糖果' },
+  { kanji: '砂糖', kana: 'さとう', meaning: '砂糖' },
+  { kanji: '塩', kana: 'しお', meaning: '盐' },
+  { kanji: '醤油', kana: 'しょうゆ', meaning: '酱油' },
   { kanji: 'お茶', kana: 'おちゃ', meaning: '茶' },
+  { kanji: 'コーヒー', kana: 'コーヒー', meaning: '咖啡' },
+  { kanji: '紅茶', kana: 'こうちゃ', meaning: '红茶' },
+  { kanji: 'お酒', kana: 'おさけ', meaning: '酒' },
+  { kanji: '牛乳', kana: 'ぎゅうにゅう', meaning: '牛奶' },
   { kanji: '水', kana: 'みず', meaning: '水' },
+  { kanji: 'カレー', kana: 'カレー', meaning: '咖喱' },
   { kanji: '料理', kana: 'りょうり', meaning: '菜肴' },
+  { kanji: '食べ物', kana: 'たべもの', meaning: '食物' },
+  { kanji: '飲み物', kana: 'のみもの', meaning: '饮料' },
+];
 
-  // 🎨 颜色类
+// 颜色类
+export const colorWords: Word[] = [
   { kanji: '青', kana: 'あお', meaning: '蓝色' },
   { kanji: '赤', kana: 'あか', meaning: '红色' },
   { kanji: '黄色', kana: 'きいろ', meaning: '黄色' },
   { kanji: '黒', kana: 'くろ', meaning: '黑色' },
   { kanji: '白', kana: 'しろ', meaning: '白色' },
   { kanji: '緑', kana: 'みどり', meaning: '绿色' },
+  { kanji: '茶色', kana: 'ちゃいろ', meaning: '茶色、棕色' },
   { kanji: '色', kana: 'いろ', meaning: '颜色' },
+];
 
-  // 动物类
+// 数字/数量/单位类
+export const numberWords: Word[] = [
+  { kanji: '零', kana: 'れい', meaning: '零' },
+  { kanji: 'ゼロ', kana: 'ゼロ', meaning: '零' },
+  { kanji: '一', kana: 'いち', meaning: '一' },
+  { kanji: '二', kana: 'に', meaning: '二' },
+  { kanji: '三', kana: 'さん', meaning: '三' },
+  { kanji: '四', kana: 'し/よん', meaning: '四' },
+  { kanji: '五', kana: 'ご', meaning: '五' },
+  { kanji: '六', kana: 'ろく', meaning: '六' },
+  { kanji: '七', kana: 'しち/なな', meaning: '七' },
+  { kanji: '八', kana: 'はち', meaning: '八' },
+  { kanji: '九', kana: 'きゅう/く', meaning: '九' },
+  { kanji: '十', kana: 'じゅう', meaning: '十' },
+  { kanji: '百', kana: 'ひゃく', meaning: '百' },
+  { kanji: '千', kana: 'せん', meaning: '千' },
+  { kanji: '万', kana: 'まん', meaning: '万' },
+  { kanji: '幾つ', kana: 'いくつ', meaning: '几个' },
+  { kanji: '幾ら', kana: 'いくら', meaning: '多少钱' },
+  { kanji: '一つ', kana: 'ひとつ', meaning: '1个' },
+  { kanji: '二つ', kana: 'ふたつ', meaning: '2个' },
+  { kanji: '三つ', kana: 'みっつ', meaning: '3个' },
+  { kanji: '四つ', kana: 'よっつ', meaning: '4个' },
+  { kanji: '五つ', kana: 'いつつ', meaning: '5个' },
+  { kanji: '六つ', kana: 'むっつ', meaning: '6个' },
+  { kanji: '七つ', kana: 'ななつ', meaning: '7个' },
+  { kanji: '八つ', kana: 'やっつ', meaning: '8个' },
+  { kanji: '九つ', kana: 'ここのつ', meaning: '9个' },
+  { kanji: '十', kana: 'とお', meaning: '10个' },
+  { kanji: '〜枚', kana: '〜まい', meaning: '〜张(扁平物)' },
+  { kanji: '〜本', kana: '〜ほん', meaning: '〜根(细长物)' },
+  { kanji: '〜冊', kana: '〜さつ', meaning: '〜本(书籍)' },
+  { kanji: '〜人', kana: '〜にん', meaning: '〜人' },
+  { kanji: '〜匹', kana: '〜ひき', meaning: '〜只(动物)' },
+  { kanji: '〜回', kana: '〜かい', meaning: '〜次' },
+  { kanji: '〜月', kana: '〜がつ', meaning: '〜月' },
+  { kanji: '〜日', kana: '〜にち', meaning: '〜号' },
+  { kanji: '〜年', kana: '〜ねん', meaning: '〜年' },
+  { kanji: '〜分', kana: '〜ふん', meaning: '〜分钟' },
+  { kanji: '〜時間', kana: '〜じかん', meaning: '〜小时' },
+  { kanji: '〜階', kana: '〜かい', meaning: '〜楼' },
+  { kanji: '〜円', kana: '〜えん', meaning: '〜日元' },
+  { kanji: '一番', kana: 'いちばん', meaning: '第一、最' },
+  { kanji: '全部', kana: 'ぜんぶ', meaning: '全部' },
+  { kanji: '半分', kana: 'はんぶん', meaning: '一半' },
+];
+
+// 交通工具类
+export const transportWords: Word[] = [
+  { kanji: '車', kana: 'くるま', meaning: '汽车' },
+  { kanji: '自動車', kana: 'じどうしゃ', meaning: '汽车' },
+  { kanji: '自転車', kana: 'じてんしゃ', meaning: '自行车' },
+  { kanji: 'バス', kana: 'バス', meaning: '公交车' },
+  { kanji: '電車', kana: 'でんしゃ', meaning: '电车' },
+  { kanji: '地下鉄', kana: 'ちかてつ', meaning: '地铁' },
+  { kanji: 'タクシー', kana: 'タクシー', meaning: '出租车' },
+  { kanji: '飛行機', kana: 'ひこうき', meaning: '飞机' },
+  { kanji: '切符', kana: 'きっぷ', meaning: '车票' },
+];
+
+// 学习/办公用品类
+export const stationeryWords: Word[] = [
+  { kanji: '鉛筆', kana: 'えんぴつ', meaning: '铅笔' },
+  { kanji: 'ペン', kana: 'ペン', meaning: '钢笔' },
+  { kanji: 'ボールペン', kana: 'ボールペン', meaning: '圆珠笔' },
+  { kanji: '万年筆', kana: 'まんねんひつ', meaning: '自来水笔' },
+  { kanji: 'ノート', kana: 'ノート', meaning: '笔记本' },
+  { kanji: '紙', kana: 'かみ', meaning: '纸' },
+  { kanji: '辞書', kana: 'じしょ', meaning: '词典' },
+  { kanji: '字引', kana: 'じびき', meaning: '词典' },
+  { kanji: '新聞', kana: 'しんぶん', meaning: '报纸' },
+  { kanji: '雑誌', kana: 'ざっし', meaning: '杂志' },
+  { kanji: '写真', kana: 'しゃしん', meaning: '照片' },
+  { kanji: '地図', kana: 'ちず', meaning: '地图' },
+  { kanji: '切手', kana: 'きって', meaning: '邮票' },
+  { kanji: '封筒', kana: 'ふうとう', meaning: '信封' },
+  { kanji: '葉書', kana: 'はがき', meaning: '明信片' },
+  { kanji: '作文', kana: 'さくぶん', meaning: '作文' },
+  { kanji: '文章', kana: 'ぶんしょう', meaning: '文章' },
+  { kanji: '言葉', kana: 'ことば', meaning: '词语、语言' },
+  { kanji: '漢字', kana: 'かんじ', meaning: '汉字' },
+  { kanji: '平仮名', kana: 'ひらがな', meaning: '平假名' },
+  { kanji: '片仮名', kana: 'かたかな', meaning: '片假名' },
+  { kanji: '英語', kana: 'えいご', meaning: '英语' },
+  { kanji: '勉強', kana: 'べんきょう', meaning: '学习' },
+  { kanji: '練習', kana: 'れんしゅう', meaning: '练习' },
+  { kanji: '授業', kana: 'じゅぎょう', meaning: '上课' },
+  { kanji: '宿題', kana: 'しゅくだい', meaning: '作业' },
+  { kanji: '試験', kana: 'しけん', meaning: '考试' },
+  { kanji: 'テスト', kana: 'テスト', meaning: '考试' },
+  { kanji: '質問', kana: 'しつもん', meaning: '问题、提问' },
+];
+
+// 家庭/生活用品类
+export const householdWords: Word[] = [
+  { kanji: '椅子', kana: 'いす', meaning: '椅子' },
+  { kanji: '机', kana: 'つくえ', meaning: '桌子' },
+  { kanji: 'テーブル', kana: 'テーブル', meaning: '桌子' },
+  { kanji: 'ベッド', kana: 'ベッド', meaning: '床' },
+  { kanji: '扉', kana: 'とびら', meaning: '门' },
+  { kanji: 'ドア', kana: 'ドア', meaning: '门' },
+  { kanji: '戸', kana: 'と', meaning: '门' },
+  { kanji: '鍵', kana: 'かぎ', meaning: '钥匙' },
+  { kanji: '傘', kana: 'かさ', meaning: '雨伞' },
+  { kanji: '鞄', kana: 'かばん', meaning: '包' },
+  { kanji: '財布', kana: 'さいふ', meaning: '钱包' },
+  { kanji: '時計', kana: 'とけい', meaning: '钟表' },
+  { kanji: 'カレンダー', kana: 'カレンダー', meaning: '日历' },
+  { kanji: 'カメラ', kana: 'カメラ', meaning: '相机' },
+  { kanji: 'テレビ', kana: 'テレビ', meaning: '电视' },
+  { kanji: 'ラジオ', kana: 'ラジオ', meaning: '收音机' },
+  { kanji: '電話', kana: 'でんわ', meaning: '电话' },
+  { kanji: '電気', kana: 'でんき', meaning: '电、电灯' },
+  { kanji: 'エレベーター', kana: 'エレベーター', meaning: '电梯' },
+  { kanji: 'トイレ', kana: 'トイレ', meaning: '厕所' },
+  { kanji: '御手洗い', kana: 'おてあらい', meaning: '厕所' },
+  { kanji: 'お風呂', kana: 'おふろ', meaning: '浴室' },
+  { kanji: '風呂', kana: 'ふろ', meaning: '浴室' },
+  { kanji: '石鹸', kana: 'せっけん', meaning: '肥皂' },
+  { kanji: '歯ブラシ', kana: 'はブラシ', meaning: '牙刷' },
+  { kanji: '鏡', kana: 'かがみ', meaning: '镜子' },
+  { kanji: '花瓶', kana: 'かびん', meaning: '花瓶' },
+  { kanji: '箱', kana: 'はこ', meaning: '箱子' },
+  { kanji: '灰皿', kana: 'はいざら', meaning: '烟灰缸' },
+  { kanji: '掃除', kana: 'そうじ', meaning: '打扫' },
+  { kanji: '洗濯', kana: 'せんたく', meaning: '洗衣' },
+];
+
+// 服装/饰品类
+export const clothingWords: Word[] = [
+  { kanji: '服', kana: 'ふく', meaning: '衣服' },
+  { kanji: '洋服', kana: 'ようふく', meaning: '西装' },
+  { kanji: '上着', kana: 'うわぎ', meaning: '上衣、外套' },
+  { kanji: 'コート', kana: 'コート', meaning: '大衣' },
+  { kanji: 'セーター', kana: 'セーター', meaning: '毛衣' },
+  { kanji: 'シャツ', kana: 'シャツ', meaning: '衬衫' },
+  { kanji: 'ワイシャツ', kana: 'ワイシャツ', meaning: '衬衫' },
+  { kanji: 'ズボン', kana: 'ズボン', meaning: '裤子' },
+  { kanji: 'スカート', kana: 'スカート', meaning: '裙子' },
+  { kanji: '靴', kana: 'くつ', meaning: '鞋' },
+  { kanji: '靴下', kana: 'くつした', meaning: '袜子' },
+  { kanji: '帽子', kana: 'ぼうし', meaning: '帽子' },
+  { kanji: '眼鏡', kana: 'めがね', meaning: '眼镜' },
+  { kanji: 'ネクタイ', kana: 'ネクタイ', meaning: '领带' },
+  { kanji: 'ハンカチ', kana: 'ハンカチ', meaning: '手帕' },
+  { kanji: '手袋', kana: 'てぶくろ', meaning: '手套' },
+];
+
+// 餐具/厨具类
+export const kitchenwareWords: Word[] = [
+  { kanji: 'お皿', kana: 'おさら', meaning: '盘子' },
+  { kanji: '茶碗', kana: 'ちゃわん', meaning: '饭碗' },
+  { kanji: 'コップ', kana: 'コップ', meaning: '杯子' },
+  { kanji: 'グラス', kana: 'グラス', meaning: '玻璃杯' },
+  { kanji: 'カップ', kana: 'カップ', meaning: '咖啡杯' },
+  { kanji: '箸', kana: 'はし', meaning: '筷子' },
+  { kanji: 'スプーン', kana: 'スプーン', meaning: '勺子' },
+  { kanji: 'フォーク', kana: 'フォーク', meaning: '叉子' },
+  { kanji: 'ナイフ', kana: 'ナイフ', meaning: '刀子' },
+];
+
+// 自然/天气类
+export const natureWords: Word[] = [
+  { kanji: '天気', kana: 'てんき', meaning: '天气' },
+  { kanji: '晴れ', kana: 'はれ', meaning: '晴天' },
+  { kanji: '曇り', kana: 'くもり', meaning: '阴天' },
+  { kanji: '雨', kana: 'あめ', meaning: '雨' },
+  { kanji: '雪', kana: 'ゆき', meaning: '雪' },
+  { kanji: '風', kana: 'かぜ', meaning: '风' },
+  { kanji: '空', kana: 'そら', meaning: '天空' },
+  { kanji: '海', kana: 'うみ', meaning: '海' },
+  { kanji: '川', kana: 'かわ', meaning: '河' },
+  { kanji: '池', kana: 'いけ', meaning: '池塘' },
+  { kanji: '山', kana: 'やま', meaning: '山' },
+  { kanji: '木', kana: 'き', meaning: '树' },
+  { kanji: '花', kana: 'はな', meaning: '花' },
+  { kanji: '岩', kana: 'いわ', meaning: '岩石' },
+];
+
+// 身体部位类
+export const bodyWords: Word[] = [
+  { kanji: '頭', kana: 'あたま', meaning: '头' },
+  { kanji: '顔', kana: 'かお', meaning: '脸' },
+  { kanji: '目', kana: 'め', meaning: '眼睛' },
+  { kanji: '耳', kana: 'みみ', meaning: '耳朵' },
+  { kanji: '鼻', kana: 'はな', meaning: '鼻子' },
+  { kanji: '口', kana: 'くち', meaning: '嘴' },
+  { kanji: '歯', kana: 'は', meaning: '牙齿' },
+  { kanji: '手', kana: 'て', meaning: '手' },
+  { kanji: '足', kana: 'あし', meaning: '脚、腿' },
+  { kanji: '体', kana: 'からだ', meaning: '身体' },
+  { kanji: 'お腹', kana: 'おなか', meaning: '肚子' },
+  { kanji: '背中', kana: 'せなか', meaning: '背' },
+  { kanji: '声', kana: 'こえ', meaning: '声音' },
+];
+
+// 动物类
+export const animalWords: Word[] = [
   { kanji: '犬', kana: 'いぬ', meaning: '狗' },
   { kanji: '猫', kana: 'ねこ', meaning: '猫' },
   { kanji: '鳥', kana: 'とり', meaning: '鸟' },
   { kanji: '動物', kana: 'どうぶつ', meaning: '动物' },
-
-  // 动词
-  { kanji: '来る', kana: 'くる', meaning: '来' },
-  { kanji: '起きる', kana: 'おきる', meaning: '起来、起床' },
-  { kanji: '食べる', kana: 'たべる', meaning: '吃' },
-  { kanji: '見る', kana: 'みる', meaning: '看见、体验' },
-  { kanji: '寝る', kana: 'ねる', meaning: '睡觉' },
-  { kanji: '行く', kana: 'いく', meaning: '去' },
-  { kanji: '飲む', kana: 'のむ', meaning: '喝' },
-  { kanji: '走る', kana: 'はしる', meaning: '跑' },
-  { kanji: '話す', kana: 'はなす', meaning: '讲、告诉' },
-  { kanji: '読む', kana: 'よむ', meaning: '看、阅读' },
-  { kanji: '買う', kana: 'かう', meaning: '买' },
-
-  // 形容词
-  { kanji: '大きい', kana: 'おおきい', meaning: '大的' },
-  { kanji: '小さい', kana: 'ちいさい', meaning: '小的' },
-  { kanji: '高い', kana: 'たかい', meaning: '高的、贵的' },
-  { kanji: '安い', kana: 'やすい', meaning: '便宜的' },
-  { kanji: '新しい', kana: 'あたらしい', meaning: '新的' },
-  { kanji: '古い', kana: 'ふるい', meaning: '旧的' },
-  { kanji: '良い', kana: 'いい', meaning: '好的' },
-  { kanji: '悪い', kana: 'わるい', meaning: '坏的' },
-  { kanji: '美しい', kana: 'うつくしい', meaning: '美丽的' }, // Added to have more adjs
-  { kanji: '美味しい', kana: 'おいしい', meaning: '好吃的' },
 ];
 
+// 抽象概念/状态类
+export const abstractWords: Word[] = [
+  { kanji: '名前', kana: 'なまえ', meaning: '名字' },
+  { kanji: '意味', kana: 'いみ', meaning: '意思、含义' },
+  { kanji: '時間', kana: 'じかん', meaning: '时间' },
+  { kanji: '仕事', kana: 'しごと', meaning: '工作' },
+  { kanji: '用事', kana: 'ようじ', meaning: '事情' },
+  { kanji: '元気', kana: 'げんき', meaning: '精神、健康' },
+  { kanji: '病気', kana: 'びょうき', meaning: '生病' },
+  { kanji: '薬', kana: 'くすり', meaning: '药' },
+  { kanji: '好き', kana: 'すき', meaning: '喜欢' },
+  { kanji: '嫌い', kana: 'きらい', meaning: '讨厌' },
+  { kanji: '上手', kana: 'じょうず', meaning: '擅长' },
+  { kanji: '下手', kana: 'へた', meaning: '不擅长' },
+  { kanji: '便利', kana: 'べんり', meaning: '方便' },
+  { kanji: '丈夫', kana: 'じょうぶ', meaning: '结实、健康' },
+  { kanji: '暇', kana: 'ひま', meaning: '空闲' },
+  { kanji: '問題', kana: 'もんだい', meaning: '问题' },
+  { kanji: '答え', kana: 'こたえ', meaning: '答案' },
+  { kanji: '番号', kana: 'ばんごう', meaning: '号码' },
+  { kanji: '荷物', kana: 'にもつ', meaning: '行李' },
+  { kanji: '旅行', kana: 'りょこう', meaning: '旅行' },
+  { kanji: '散歩', kana: 'さんぽ', meaning: '散步' },
+  { kanji: '音楽', kana: 'おんがく', meaning: '音乐' },
+  { kanji: '映画', kana: 'えいが', meaning: '电影' },
+  { kanji: '結婚', kana: 'けっこん', meaning: '结婚' },
+  { kanji: '誕生日', kana: 'たんじょうび', meaning: '生日' },
+];
+
+// ========== 动词 ==========
+export const verbWords: Word[] = [
+  // 三类动词
+  { kanji: 'する', kana: 'する', meaning: '做' },
+  { kanji: '来る', kana: 'くる', meaning: '来' },
+  
+  // 二类动词
+  { kanji: '開ける', kana: 'あける', meaning: '开、打开' },
+  { kanji: '上げる', kana: 'あげる', meaning: '举、抬高、举行' },
+  { kanji: '挙げる', kana: 'あげる', meaning: '举出' },
+  { kanji: '入れる', kana: 'いれる', meaning: '容纳、放入' },
+  { kanji: '起きる', kana: 'おきる', meaning: '起来、起床' },
+  { kanji: '教える', kana: 'おしえる', meaning: '教导、指点' },
+  { kanji: '覚える', kana: 'おぼえる', meaning: '记得、学会' },
+  { kanji: '降りる', kana: 'おりる', meaning: '从高处下来' },
+  { kanji: '借りる', kana: 'かりる', meaning: '借' },
+  { kanji: '消える', kana: 'きえる', meaning: '消失' },
+  { kanji: '着る', kana: 'きる', meaning: '穿(上衣)' },
+  { kanji: '答える', kana: 'こたえる', meaning: '回答' },
+  { kanji: '閉める', kana: 'しめる', meaning: '关上' },
+  { kanji: '締める', kana: 'しめる', meaning: '系上、绷紧' },
+  { kanji: '疲れる', kana: 'つかれる', meaning: '疲劳、疲惫' },
+  { kanji: '点ける', kana: 'つける', meaning: '开(灯)' },
+  { kanji: '勤める', kana: 'つとめる', meaning: '工作、担任' },
+  { kanji: '出掛ける', kana: 'でかける', meaning: '外出、出去' },
+  { kanji: '出来る', kana: 'できる', meaning: '会、能' },
+  { kanji: '出る', kana: 'でる', meaning: '出去、出来' },
+  { kanji: '並べる', kana: 'ならべる', meaning: '并列、陈列' },
+  { kanji: '寝る', kana: 'ねる', meaning: '躺着、睡觉' },
+  { kanji: '見せる', kana: 'みせる', meaning: '给看、让看' },
+  { kanji: '忘れる', kana: 'わすれる', meaning: '忘记' },
+  { kanji: '生まれる', kana: 'うまれる', meaning: '产生、出现' },
+  { kanji: '晴れる', kana: 'はれる', meaning: '晴、云散' },
+  { kanji: '見る', kana: 'みる', meaning: '看见、体验' },
+  { kanji: '食べる', kana: 'たべる', meaning: '吃' },
+  
+  // 一类动词
+  { kanji: '会う', kana: 'あう', meaning: '遇、遇上' },
+  { kanji: '開く', kana: 'あく', meaning: '开、打开' },
+  { kanji: '遊ぶ', kana: 'あそぶ', meaning: '玩' },
+  { kanji: '洗う', kana: 'あらう', meaning: '洗' },
+  { kanji: 'ある', kana: 'ある', meaning: '在、有' },
+  { kanji: '歩く', kana: 'あるく', meaning: '步行、走' },
+  { kanji: '言う', kana: 'いう', meaning: '说、诉说' },
+  { kanji: '行く', kana: 'いく', meaning: '去' },
+  { kanji: '要る', kana: 'いる', meaning: '需要(例外)' },
+  { kanji: '歌う', kana: 'うたう', meaning: '歌颂、唱' },
+  { kanji: '売る', kana: 'うる', meaning: '卖、售' },
+  { kanji: '置く', kana: 'おく', meaning: '放置、放下' },
+  { kanji: '押す', kana: 'おす', meaning: '推、压、按' },
+  { kanji: '泳ぐ', kana: 'およぐ', meaning: '游泳' },
+  { kanji: '終わる', kana: 'おわる', meaning: '终了、结束' },
+  { kanji: '買う', kana: 'かう', meaning: '买' },
+  { kanji: '返す', kana: 'かえす', meaning: '回去、归还' },
+  { kanji: '帰る', kana: 'かえる', meaning: '返回、回归(例外)' },
+  { kanji: '掛かる', kana: 'かかる', meaning: '垂挂、花费' },
+  { kanji: '書く', kana: 'かく', meaning: '写、画' },
+  { kanji: '描く', kana: 'かく', meaning: '画' },
+  { kanji: '貸す', kana: 'かす', meaning: '借出' },
+  { kanji: '被る', kana: 'かぶる', meaning: '戴' },
+  { kanji: '聞く', kana: 'きく', meaning: '听' },
+  { kanji: '切る', kana: 'きる', meaning: '斩、完结(例外)' },
+  { kanji: '曇る', kana: 'くもる', meaning: '天阴' },
+  { kanji: '消す', kana: 'けす', meaning: '熄灭、关掉' },
+  { kanji: '困る', kana: 'こまる', meaning: '为难、难办' },
+  { kanji: '咲く', kana: 'さく', meaning: '(花)开' },
+  { kanji: '死ぬ', kana: 'しぬ', meaning: '死' },
+  { kanji: '閉まる', kana: 'しまる', meaning: '关闭、紧闭' },
+  { kanji: '知る', kana: 'しる', meaning: '知道、得知(例外)' },
+  { kanji: '吸う', kana: 'すう', meaning: '吸入' },
+  { kanji: '住む', kana: 'すむ', meaning: '居住' },
+  { kanji: '座る', kana: 'すわる', meaning: '坐' },
+  { kanji: '出す', kana: 'だす', meaning: '拿出、提出' },
+  { kanji: '立つ', kana: 'たつ', meaning: '立、站' },
+  { kanji: '頼む', kana: 'たのむ', meaning: '拜托、恳求' },
+  { kanji: '違う', kana: 'ちがう', meaning: '不同、错误' },
+  { kanji: '使う', kana: 'つかう', meaning: '使用' },
+  { kanji: '着く', kana: 'つく', meaning: '到达' },
+  { kanji: '作る', kana: 'つくる', meaning: '做、制作' },
+  { kanji: '飛ぶ', kana: 'とぶ', meaning: '飞翔、飞行' },
+  { kanji: '止まる', kana: 'とまる', meaning: '停止、止住' },
+  { kanji: '取る', kana: 'とる', meaning: '取得、拿' },
+  { kanji: '撮る', kana: 'とる', meaning: '摄影、照相' },
+  { kanji: '鳴く', kana: 'なく', meaning: '鸣叫' },
+  { kanji: '無くす', kana: 'なくす', meaning: '丧失' },
+  { kanji: '習う', kana: 'ならう', meaning: '学习' },
+  { kanji: '並ぶ', kana: 'ならぶ', meaning: '排列' },
+  { kanji: 'なる', kana: 'なる', meaning: '成为、变成' },
+  { kanji: '脱ぐ', kana: 'ぬぐ', meaning: '脱、摘掉' },
+  { kanji: '登る', kana: 'のぼる', meaning: '攀登、上升' },
+  { kanji: '飲む', kana: 'のむ', meaning: '喝、吞' },
+  { kanji: '乗る', kana: 'のる', meaning: '乘坐' },
+  { kanji: '入る', kana: 'はいる', meaning: '进入(例外)' },
+  { kanji: '穿く', kana: 'はく', meaning: '穿(裤子、鞋)' },
+  { kanji: '履く', kana: 'はく', meaning: '穿(鞋)' },
+  { kanji: '始まる', kana: 'はじまる', meaning: '开始' },
+  { kanji: '走る', kana: 'はしる', meaning: '跑(例外)' },
+  { kanji: '働く', kana: 'はたらく', meaning: '工作、劳动' },
+  { kanji: '話す', kana: 'はなす', meaning: '讲、告诉' },
+  { kanji: '貼る', kana: 'はる', meaning: '贴' },
+  { kanji: '引く', kana: 'ひく', meaning: '拉、拔、减去' },
+  { kanji: '弾く', kana: 'ひく', meaning: '弹奏' },
+  { kanji: '吹く', kana: 'ふく', meaning: '吹' },
+  { kanji: '降る', kana: 'ふる', meaning: '下(雨雪)' },
+  { kanji: '曲がる', kana: 'まがる', meaning: '弯曲、转弯' },
+  { kanji: '待つ', kana: 'まつ', meaning: '等、等待' },
+  { kanji: '磨く', kana: 'みがく', meaning: '刷、磨' },
+  { kanji: '持つ', kana: 'もつ', meaning: '拿、保持' },
+  { kanji: '遣る', kana: 'やる', meaning: '做' },
+  { kanji: '呼ぶ', kana: 'よぶ', meaning: '叫、叫来' },
+  { kanji: '読む', kana: 'よむ', meaning: '看、阅读' },
+  { kanji: '分かる', kana: 'わかる', meaning: '明白、懂' },
+  { kanji: '渡す', kana: 'わたす', meaning: '交付、让给' },
+  { kanji: '渡る', kana: 'わたる', meaning: '渡、经过' },
+];
+
+// ========== 形容词 ==========
+export const adjectiveWords: Word[] = [
+  { kanji: '青い', kana: 'あおい', meaning: '蓝色的' },
+  { kanji: '赤い', kana: 'あかい', meaning: '红色的' },
+  { kanji: '明るい', kana: 'あかるい', meaning: '明亮的' },
+  { kanji: '暖かい', kana: 'あたたかい', meaning: '温暖的' },
+  { kanji: '温かい', kana: 'あたたかい', meaning: '温和的' },
+  { kanji: '新しい', kana: 'あたらしい', meaning: '新的' },
+  { kanji: '厚い', kana: 'あつい', meaning: '厚的' },
+  { kanji: '暑い', kana: 'あつい', meaning: '热的' },
+  { kanji: '熱い', kana: 'あつい', meaning: '烫的' },
+  { kanji: '危ない', kana: 'あぶない', meaning: '危险的' },
+  { kanji: '甘い', kana: 'あまい', meaning: '甜的' },
+  { kanji: '良い', kana: 'いい', meaning: '好的' },
+  { kanji: 'よい', kana: 'よい', meaning: '好的' },
+  { kanji: '忙しい', kana: 'いそがしい', meaning: '繁忙的' },
+  { kanji: '痛い', kana: 'いたい', meaning: '疼痛的' },
+  { kanji: '薄い', kana: 'うすい', meaning: '薄的' },
+  { kanji: '煩い', kana: 'うるさい', meaning: '吵闹的' },
+  { kanji: '美味しい', kana: 'おいしい', meaning: '好吃的' },
+  { kanji: '多い', kana: 'おおい', meaning: '多的' },
+  { kanji: '大きい', kana: 'おおきい', meaning: '大的' },
+  { kanji: '遅い', kana: 'おそい', meaning: '慢的' },
+  { kanji: '重い', kana: 'おもい', meaning: '重的' },
+  { kanji: '面白い', kana: 'おもしろい', meaning: '有趣的' },
+  { kanji: '辛い', kana: 'からい', meaning: '辣的' },
+  { kanji: '軽い', kana: 'かるい', meaning: '轻的' },
+  { kanji: '可愛い', kana: 'かわいい', meaning: '可爱的' },
+  { kanji: '黄色い', kana: 'きいろい', meaning: '黄色的' },
+  { kanji: '汚い', kana: 'きたない', meaning: '脏的' },
+  { kanji: '暗い', kana: 'くらい', meaning: '昏暗的' },
+  { kanji: '黒い', kana: 'くろい', meaning: '黑色的' },
+  { kanji: '寒い', kana: 'さむい', meaning: '寒冷的' },
+  { kanji: '少ない', kana: 'すくない', meaning: '少的' },
+  { kanji: '涼しい', kana: 'すずしい', meaning: '凉爽的' },
+  { kanji: '狭い', kana: 'せまい', meaning: '狭窄的' },
+  { kanji: '高い', kana: 'たかい', meaning: '高的、贵的' },
+  { kanji: '楽しい', kana: 'たのしい', meaning: '快乐的' },
+  { kanji: '小さい', kana: 'ちいさい', meaning: '小的' },
+  { kanji: '近い', kana: 'ちかい', meaning: '近的' },
+  { kanji: 'つまらない', kana: 'つまらない', meaning: '无聊的' },
+  { kanji: '冷たい', kana: 'つめたい', meaning: '凉的' },
+  { kanji: '強い', kana: 'つよい', meaning: '强的' },
+  { kanji: '長い', kana: 'ながい', meaning: '长的' },
+  { kanji: '温い', kana: 'ぬるい', meaning: '微温的' },
+  { kanji: '早い', kana: 'はやい', meaning: '早的' },
+  { kanji: '速い', kana: 'はやい', meaning: '快的' },
+  { kanji: '低い', kana: 'ひくい', meaning: '低的' },
+  { kanji: '広い', kana: 'ひろい', meaning: '宽阔的' },
+  { kanji: '太い', kana: 'ふとい', meaning: '粗的' },
+  { kanji: '古い', kana: 'ふるい', meaning: '旧的' },
+  { kanji: '細い', kana: 'ほそい', meaning: '细的' },
+  { kanji: '欲しい', kana: 'ほしい', meaning: '想要的' },
+  { kanji: 'まずい', kana: 'まずい', meaning: '难吃的、不妙的' },
+  { kanji: '丸い', kana: 'まるい', meaning: '圆的' },
+  { kanji: '円い', kana: 'まるい', meaning: '圆的' },
+  { kanji: '短い', kana: 'みじかい', meaning: '短的' },
+  { kanji: '易しい', kana: 'やさしい', meaning: '容易的' },
+  { kanji: '安い', kana: 'やすい', meaning: '便宜的' },
+  { kanji: '若い', kana: 'わかい', meaning: '年轻的' },
+  { kanji: '悪い', kana: 'わるい', meaning: '坏的' },
+];
+
+// ========== 形容动词 ==========
+export const naAdjectiveWords: Word[] = [
+  { kanji: '好き', kana: 'すき', meaning: '喜欢' },
+  { kanji: '嫌い', kana: 'きらい', meaning: '讨厌' },
+  { kanji: '上手', kana: 'じょうず', meaning: '擅长' },
+  { kanji: '下手', kana: 'へた', meaning: '不擅长' },
+  { kanji: '便利', kana: 'べんり', meaning: '方便' },
+  { kanji: '丈夫', kana: 'じょうぶ', meaning: '结实' },
+  { kanji: '元気', kana: 'げんき', meaning: '精神好' },
+  { kanji: '暇', kana: 'ひま', meaning: '空闲' },
+  { kanji: '簡単', kana: 'かんたん', meaning: '简单' },
+  { kanji: '大切', kana: 'たいせつ', meaning: '重要' },
+  { kanji: '綺麗', kana: 'きれい', meaning: '漂亮' },
+  { kanji: '静か', kana: 'しずか', meaning: '安静' },
+  { kanji: '賑やか', kana: 'にぎやか', meaning: '热闹' },
+  { kanji: '素敵', kana: 'すてき', meaning: '极好的' },
+  { kanji: '色々', kana: 'いろいろ', meaning: '各种各样' },
+];
+
+// ========== 副词 ==========
+export const adverbWords: Word[] = [
+  { kanji: 'ああ', kana: 'ああ', meaning: '那样' },
+  { kanji: '余り', kana: 'あまり', meaning: '太、过分' },
+  { kanji: '幾ら', kana: 'いくら', meaning: '多少' },
+  { kanji: '一体', kana: 'いったい', meaning: '究竟' },
+  { kanji: '何時も', kana: 'いつも', meaning: '总是' },
+  { kanji: '一々', kana: 'いちいち', meaning: '逐一' },
+  { kanji: '大勢', kana: 'おおぜい', meaning: '众多' },
+  { kanji: 'がる', kana: 'がる', meaning: '觉得~' },
+  { kanji: '直ぐに', kana: 'すぐに', meaning: '马上' },
+  { kanji: '少し', kana: 'すこし', meaning: '稍微' },
+  { kanji: 'ずつ', kana: 'ずつ', meaning: '各、每' },
+  { kanji: '大変', kana: 'たいへん', meaning: '非常' },
+  { kanji: '沢山', kana: 'たくさん', meaning: '很多' },
+  { kanji: '多分', kana: 'たぶん', meaning: '大概' },
+  { kanji: '段々', kana: 'だんだん', meaning: '逐渐' },
+  { kanji: '丁度', kana: 'ちょうど', meaning: '正好' },
+  { kanji: '一寸', kana: 'ちょっと', meaning: '稍微' },
+  { kanji: 'どう', kana: 'どう', meaning: '怎样' },
+  { kanji: 'どうして', kana: 'どうして', meaning: '为什么' },
+  { kanji: 'どうぞ', kana: 'どうぞ', meaning: '请' },
+  { kanji: 'どうも', kana: 'どうも', meaning: '怎么也' },
+  { kanji: '時々', kana: 'ときどき', meaning: '有时' },
+  { kanji: 'とても', kana: 'とても', meaning: '非常' },
+  { kanji: 'なぜ', kana: 'なぜ', meaning: '为何' },
+  { kanji: 'また', kana: 'また', meaning: '又、再' },
+  { kanji: 'まだ', kana: 'まだ', meaning: '还、尚' },
+  { kanji: 'もう', kana: 'もう', meaning: '已经、再' },
+];
+
+// ========== 感叹词 ==========
+export const interjectionWords: Word[] = [
+  { kanji: 'ああ', kana: 'ああ', meaning: '啊、哎呀' },
+  { kanji: 'あの', kana: 'あの', meaning: '哎、嗯' },
+  { kanji: 'ええ', kana: 'ええ', meaning: '嗯、对' },
+  { kanji: 'さあ', kana: 'さあ', meaning: '喂、呀' },
+  { kanji: 'そう', kana: 'そう', meaning: '是、没错' },
+  { kanji: 'では', kana: 'では', meaning: '那么' },
+  { kanji: 'はい', kana: 'はい', meaning: '是、好' },
+  { kanji: 'もしもし', kana: 'もしもし', meaning: '喂(电话)' },
+];
+
+// ========== 接续词 ==========
+export const conjunctionWords: Word[] = [
+  { kanji: 'しかし', kana: 'しかし', meaning: '可是' },
+  { kanji: 'そうして', kana: 'そうして', meaning: '然后' },
+  { kanji: 'そして', kana: 'そして', meaning: '于是' },
+  { kanji: 'それから', kana: 'それから', meaning: '接着' },
+  { kanji: 'それでは', kana: 'それでは', meaning: '那么' },
+  { kanji: 'でも', kana: 'でも', meaning: '但是' },
+];
+
+// ========== 指示词/连体词 ==========
+export const demonstrativeWords: Word[] = [
+  { kanji: 'あの', kana: 'あの', meaning: '那个' },
+  { kanji: 'あれ', kana: 'あれ', meaning: '那个' },
+  { kanji: 'こちら', kana: 'こちら', meaning: '这边' },
+  { kanji: 'こっち', kana: 'こっち', meaning: '这边' },
+  { kanji: 'この', kana: 'この', meaning: '这个' },
+  { kanji: 'これ', kana: 'これ', meaning: '这个' },
+  { kanji: 'こんな', kana: 'こんな', meaning: '这样的' },
+  { kanji: 'そこ', kana: 'そこ', meaning: '那里' },
+  { kanji: 'そちら', kana: 'そちら', meaning: '那边' },
+  { kanji: 'そっち', kana: 'そっち', meaning: '那边' },
+  { kanji: 'その', kana: 'その', meaning: '那个' },
+  { kanji: 'それ', kana: 'それ', meaning: '那个' },
+  { kanji: 'どんな', kana: 'どんな', meaning: '怎样的' },
+  { kanji: 'どれ', kana: 'どれ', meaning: '哪个' },
+  { kanji: 'どの', kana: 'どの', meaning: '哪个' },
+  { kanji: '何の', kana: 'なんの', meaning: '什么样的' },
+];
+
+// ========== 其他（助数词、接头词等） ==========
+export const otherWords: Word[] = [
+  { kanji: 'お', kana: 'お', meaning: '表示尊敬' },
+  { kanji: '御', kana: 'おん', meaning: '表示尊敬' },
+  { kanji: '〜かけ', kana: '〜かけ', meaning: '未做完' },
+  { kanji: '〜ぐらい', kana: '〜ぐらい', meaning: '大约' },
+  { kanji: '〜くらい', kana: '〜くらい', meaning: '大约' },
+  { kanji: '〜ごろ', kana: '〜ごろ', meaning: '时候' },
+  { kanji: '〜ころ', kana: '〜ころ', meaning: '时候' },
+  { kanji: '〜さん', kana: '〜さん', meaning: '先生/女士' },
+  { kanji: '〜たち', kana: '〜たち', meaning: '表示复数' },
+  { kanji: '〜中', kana: '〜ちゅう', meaning: '之中' },
+  { kanji: '〜など', kana: '〜など', meaning: '之类' },
+  { kanji: '〜ばかり', kana: '〜ばかり', meaning: '只、仅' },
+  { kanji: '〜ほど', kana: '〜ほど', meaning: '程度' },
+  { kanji: '〜まで', kana: '〜まで', meaning: '到~为止' },
+  { kanji: '〜も', kana: '〜も', meaning: '也' },
+];
+
+// ========== 合并全部词汇 ==========
+export const vocabulary: Word[] = [
+  ...timeWords,
+  ...weekWords,
+  ...placeWords,
+  ...personWords,
+  ...foodWords,
+  ...colorWords,
+  ...numberWords,
+  ...transportWords,
+  ...stationeryWords,
+  ...householdWords,
+  ...clothingWords,
+  ...kitchenwareWords,
+  ...natureWords,
+  ...bodyWords,
+  ...animalWords,
+  ...abstractWords,
+  ...verbWords,
+  ...adjectiveWords,
+  ...naAdjectiveWords,
+  ...adverbWords,
+  ...interjectionWords,
+  ...conjunctionWords,
+  ...demonstrativeWords,
+  ...otherWords,
+];
+
+// 保留原有的辅助函数
 export const allKana = [
   'あ', 'い', 'う', 'え', 'お',
   'か', 'き', 'く', 'け', 'こ',
@@ -148,7 +794,6 @@ export const allKana = [
 ];
 
 export function getRandomDisclaimerKana(targetKana: string, count: number): string[] {
-  // Extract complex characters first (e.g. きゃ, しゅ) so they are kept together
   let extractedTargetChars: string[] = [];
   let i = 0;
   while (i < targetKana.length) {
@@ -177,34 +822,17 @@ export function getRandomDisclaimerKana(targetKana: string, count: number): stri
 export function splitKana(wordKana: string): string[] {
   let result: string[] = [];
   let i = 0;
-  while(i < wordKana.length) {
-    if (i < wordKana.length - 1 && ['ゃ', 'ゅ', 'ょ'].includes(wordKana[i+1])) {
-      result.push(wordKana.substring(i, i+2));
+  while (i < wordKana.length) {
+    if (i < wordKana.length - 1 && ['ゃ', 'ゅ', 'ょ'].includes(wordKana[i + 1])) {
+      result.push(wordKana.substring(i, i + 2));
       i += 2;
     } else if (i < wordKana.length - 1 && wordKana[i] === 'っ') {
-      result.push(wordKana.substring(i, i+2)); // treat small tsu + next char as one? Or just small tsu. Let's just treat small tsu as a separate character for complexity, or keep it simple. Actually, let's treat small tsu as a separate choice but users have to click it.
-      i += 2; 
-    }
-     else {
+      result.push(wordKana.substring(i, i + 2));
+      i += 2;
+    } else {
       result.push(wordKana[i]);
       i += 1;
     }
   }
-  
-  // Re-evaluating small tsu (促音) and small kana:
-  // It's easier if small tsu 'っ' is just its own button, and 'ゃ' is its own button OR tied to the character before it.
-  // Standard way: 'きゃ' is one button, 'っ' is one button.
-  let correctedResult: string[] = [];
-  let j = 0;
-  while(j < wordKana.length) {
-    if (j < wordKana.length - 1 && ['ゃ', 'ゅ', 'ょ'].includes(wordKana[j+1])) {
-      correctedResult.push(wordKana.substring(j, j+2));
-      j += 2;
-    } else {
-      correctedResult.push(wordKana[j]);
-      j++;
-    }
-  }
-  
-  return correctedResult;
+  return result;
 }
