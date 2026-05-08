@@ -75,7 +75,7 @@ export default function App() {
     setIsCorrect(null);
     setShowHint(false);
 
-    playAudio(targetWord.kanji !== targetWord.kana ? targetWord.kanji : targetWord.kana);
+    playAudio(targetWord.kana);
     
     if (mode === 'MODE_1' || (mode === 'MODE_3' && subMode === 1)) {
       setMeaningOptions(getMeaningOptions(targetWord.meaning));
@@ -265,7 +265,7 @@ export default function App() {
                   <div className="flex items-center justify-center gap-3 mb-2">
                     <h2 className="text-4xl font-extrabold text-slate-800">{currentWord.kanji !== currentWord.kana ? currentWord.kanji : currentWord.kana}</h2>
                     <button 
-                      onClick={() => playAudio(currentWord.kanji !== currentWord.kana ? currentWord.kanji : currentWord.kana)}
+                      onClick={() => playAudio(currentWord.kana)}
                       className="text-slate-400 hover:text-indigo-600 focus:outline-none p-2 hover:bg-slate-100 rounded-full transition-colors"
                       title="朗读单词"
                     >
@@ -304,7 +304,7 @@ export default function App() {
                   <div className="flex items-center justify-center gap-3">
                     <p className="text-xl text-slate-400 font-medium tracking-widest">【 {currentWord.kanji !== currentWord.kana ? currentWord.kanji : '无汉字'} 】</p>
                     <button 
-                      onClick={() => playAudio(currentWord.kanji !== currentWord.kana ? currentWord.kanji : currentWord.kana)}
+                      onClick={() => playAudio(currentWord.kana)}
                       className="text-slate-400 hover:text-indigo-600 focus:outline-none p-1.5 hover:bg-slate-100 rounded-full transition-colors"
                       title="朗读单词"
                     >
