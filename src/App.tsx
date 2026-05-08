@@ -46,10 +46,14 @@ export default function App() {
 
   const startGame = (mode: GameMode) => {
     // Unlock audio on mobile browsers
-    if ('speechSynthesis' in window) {
-      const utterance = new SpeechSynthesisUtterance('');
-      utterance.volume = 0;
-      window.speechSynthesis.speak(utterance);
+    try {
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance('');
+        utterance.volume = 0;
+        window.speechSynthesis.speak(utterance);
+      }
+    } catch (e) {
+      console.warn('Speech synthesis unlock failed', e);
     }
 
     const activeWords = categories[selectedCategoryIndex].words;
@@ -68,19 +72,23 @@ export default function App() {
   };
 
   const playAudio = (text: string) => {
-    if ('speechSynthesis' in window) {
-      window.speechSynthesis.cancel();
-      const utterance = new SpeechSynthesisUtterance(text);
-      utterance.lang = 'ja-JP';
-      utterance.rate = 0.9;
-      
-      const voices = window.speechSynthesis.getVoices();
-      const jaVoice = voices.find(v => v.lang === 'ja-JP' || v.lang === 'ja_JP' || v.lang.includes('ja'));
-      if (jaVoice) {
-        utterance.voice = jaVoice;
+    try {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+        const utterance = new SpeechSynthesisUtterance(text);
+        utterance.lang = 'ja-JP';
+        utterance.rate = 0.9;
+        
+        const voices = window.speechSynthesis.getVoices();
+        const jaVoice = voices.find(v => v.lang === 'ja-JP' || v.lang === 'ja_JP' || v.lang.includes('ja'));
+        if (jaVoice) {
+          utterance.voice = jaVoice;
+        }
+        
+        window.speechSynthesis.speak(utterance);
       }
-      
-      window.speechSynthesis.speak(utterance);
+    } catch (e) {
+      console.warn('Speech synthesis playback failed', e);
     }
   };
 
