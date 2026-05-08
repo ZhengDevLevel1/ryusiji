@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Word, vocabulary, getRandomDisclaimerKana, splitKana, categories } from './data/vocabulary';
-import { Target, Trophy, Clock, Zap, RefreshCw, Eye, X, ChevronDown } from 'lucide-react';
+import { Target, Trophy, Clock, Zap, RefreshCw, Eye, X, ChevronDown, Volume2 } from 'lucide-react';
 import { motion } from 'motion/react';
 
-type GameState = 'START' | 'PLAYING';
+type GameState = 'START' | 'PLAYING' | 'GAME_OVER';
 type GameMode = 'MODE_1' | 'MODE_2' | 'MODE_3';
 
 export default function App() {
@@ -12,6 +12,8 @@ export default function App() {
   const [currentSubMode, setCurrentSubMode] = useState<1 | 2>(1);
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState<number>(0);
   
+  const [wordPool, setWordPool] = useState<Word[]>([]);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
   const [currentWord, setCurrentWord] = useState<Word | null>(null);
   
   // Mode 1 state
@@ -43,40 +45,61 @@ export default function App() {
   };
 
   const startGame = (mode: GameMode) => {
+    const activeWords = categories[selectedCategoryIndex].words;
+    // ensure that if a category has very few words, we don't crash
+    const pool = activeWords.length > 0 ? activeWords : vocabulary;
+    const shuffled = [...pool].sort(() => Math.random() - 0.5);
+    
+    setWordPool(shuffled);
+    setCurrentIndex(0);
+    
     setGameMode(mode);
     setCurrentSubMode(1);
     setScore(0);
     setGameState('PLAYING');
-    nextWordSequence(mode, 1);
+    setupWord(mode, 1, shuffled[0]);
   };
 
-  const nextWordSequence = (mode: GameMode, subMode: 1 | 2, word?: Word) => {
-    const activeWords = categories[selectedCategoryIndex].words;
-    // ensure that if a category has very few words, we don't crash
-    const pool = activeWords.length > 0 ? activeWords : vocabulary;
-    
-    let targetWord = word;
-    if (!targetWord) {
-      if (pool.length > 1) {
-        do {
-          targetWord = pool[Math.floor(Math.random() * pool.length)];
-        } while (currentWord && targetWord.kanji === currentWord.kanji && targetWord.kana === currentWord.kana);
-      } else {
-        targetWord = pool[0];
-      }
+  const playAudio = (text: string) => {
+    if ('speechSynthesis' in window) {
+      window.speechSynthesis.cancel();
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.lang = 'ja-JP';
+      utterance.rate = 0.9;
+      window.speechSynthesis.speak(utterance);
     }
-    
-    setCurrentWord(targetWord!);
+  };
+
+  const setupWord = (mode: GameMode, subMode: 1 | 2, targetWord: Word) => {
+    setCurrentWord(targetWord);
     setIsCorrect(null);
     setShowHint(false);
+
+    playAudio(targetWord.kanji !== targetWord.kana ? targetWord.kanji : targetWord.kana);
     
     if (mode === 'MODE_1' || (mode === 'MODE_3' && subMode === 1)) {
-      setMeaningOptions(getMeaningOptions(targetWord!.meaning));
+      setMeaningOptions(getMeaningOptions(targetWord.meaning));
     } else if (mode === 'MODE_2' || (mode === 'MODE_3' && subMode === 2)) {
-      const parts = splitKana(targetWord!.kana);
+      const parts = splitKana(targetWord.kana);
       setWordKanaParts(parts);
       setSelectedKanas(new Array(parts.length).fill(null));
-      setKanaOptions(getRandomDisclaimerKana(targetWord!.kana, Math.max(12, parts.length + 6)));
+      setKanaOptions(getRandomDisclaimerKana(targetWord.kana, Math.max(12, parts.length + 6)));
+    }
+  };
+
+  const handleNext = () => {
+    if (gameMode === 'MODE_3' && currentSubMode === 1) {
+      setCurrentSubMode(2);
+      setupWord(gameMode, 2, currentWord!);
+    } else {
+      const nextIndex = currentIndex + 1;
+      if (nextIndex < wordPool.length) {
+        setCurrentIndex(nextIndex);
+        setCurrentSubMode(1);
+        setupWord(gameMode, 1, wordPool[nextIndex]);
+      } else {
+        setGameState('GAME_OVER');
+      }
     }
   };
 
@@ -88,12 +111,7 @@ export default function App() {
       setIsCorrect(true);
       setScore(prev => prev + 10);
       setTimeout(() => {
-        if (gameMode === 'MODE_3') {
-          setCurrentSubMode(2);
-          nextWordSequence(gameMode, 2, currentWord);
-        } else {
-          nextWordSequence(gameMode, 1);
-        }
+        handleNext();
       }, 800);
     } else {
       setIsCorrect(false);
@@ -134,12 +152,7 @@ export default function App() {
       setIsCorrect(true);
       setScore(prev => prev + (showHint ? 5 : 20)); // Less points if hint used
       setTimeout(() => {
-        if (gameMode === 'MODE_3') {
-          setCurrentSubMode(1);
-          nextWordSequence(gameMode, 1);
-        } else {
-          nextWordSequence(gameMode, 2);
-        }
+        handleNext();
       }, 800);
     } else {
       setIsCorrect(false);
@@ -229,9 +242,15 @@ export default function App() {
                 title="退出当前模式"
               >
                 <X className="w-5 h-5" />
-                <span className="font-medium">退出</span>
+                <span className="font-medium hidden sm:inline">退出</span>
               </button>
               
+              <div className="flex items-center gap-2 text-indigo-600 font-bold bg-indigo-100 px-4 py-2 rounded-lg">
+                <span>{currentIndex + 1}</span>
+                <span className="text-indigo-400">/</span>
+                <span>{wordPool.length}</span>
+              </div>
+
               <div className="flex items-center gap-2">
                 <Target className="w-5 h-5 text-indigo-500" />
                 <span className="text-lg font-bold">Score: <span className="text-indigo-600">{score}</span></span>
@@ -243,7 +262,16 @@ export default function App() {
               <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                 <div className="text-center mb-10">
                   <p className="text-slate-500 uppercase tracking-widest text-sm font-bold mb-2">Word / 单词</p>
-                  <h2 className="text-4xl font-extrabold text-slate-800 mb-2">{currentWord.kanji !== currentWord.kana ? currentWord.kanji : currentWord.kana}</h2>
+                  <div className="flex items-center justify-center gap-3 mb-2">
+                    <h2 className="text-4xl font-extrabold text-slate-800">{currentWord.kanji !== currentWord.kana ? currentWord.kanji : currentWord.kana}</h2>
+                    <button 
+                      onClick={() => playAudio(currentWord.kanji !== currentWord.kana ? currentWord.kanji : currentWord.kana)}
+                      className="text-slate-400 hover:text-indigo-600 focus:outline-none p-2 hover:bg-slate-100 rounded-full transition-colors"
+                      title="朗读单词"
+                    >
+                      <Volume2 className="w-8 h-8" />
+                    </button>
+                  </div>
                   <p className="text-2xl text-slate-400 font-medium tracking-widest">【 {currentWord.kana} 】</p>
                 </div>
                 
@@ -273,7 +301,16 @@ export default function App() {
                 <div className="text-center mb-6">
                   <p className="text-slate-500 uppercase tracking-widest text-sm font-bold mb-2">Meaning & Kanji / 含义与汉字</p>
                   <h2 className="text-3xl font-extrabold text-slate-800 mb-2">{currentWord.meaning}</h2>
-                  <p className="text-xl text-slate-400 font-medium tracking-widest">【 {currentWord.kanji !== currentWord.kana ? currentWord.kanji : '无汉字'} 】</p>
+                  <div className="flex items-center justify-center gap-3">
+                    <p className="text-xl text-slate-400 font-medium tracking-widest">【 {currentWord.kanji !== currentWord.kana ? currentWord.kanji : '无汉字'} 】</p>
+                    <button 
+                      onClick={() => playAudio(currentWord.kanji !== currentWord.kana ? currentWord.kanji : currentWord.kana)}
+                      className="text-slate-400 hover:text-indigo-600 focus:outline-none p-1.5 hover:bg-slate-100 rounded-full transition-colors"
+                      title="朗读单词"
+                    >
+                      <Volume2 className="w-6 h-6" />
+                    </button>
+                  </div>
                 </div>
 
                 <div className="flex justify-center mb-6">
@@ -328,6 +365,42 @@ export default function App() {
               </motion.div>
             )}
 
+          </div>
+        )}
+
+        {gameState === 'GAME_OVER' && (
+          <div className="p-10 text-center">
+            <motion.div
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="mb-8"
+            >
+              <div className="w-24 h-24 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Trophy className="w-12 h-12 text-indigo-600" />
+              </div>
+              <h2 className="text-4xl font-black text-slate-800 mb-2">太棒了！</h2>
+              <p className="text-xl text-slate-500">你已经完成了该分类下的所有单词！</p>
+            </motion.div>
+            
+            <div className="bg-slate-50 rounded-2xl p-8 mb-8 border border-slate-200">
+              <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-1">Final Score</p>
+              <p className="text-6xl font-black text-indigo-600 font-mono tracking-tight">{score}</p>
+            </div>
+
+            <div className="flex gap-4">
+              <button
+                onClick={() => setGameState('START')}
+                className="flex-1 bg-white border-2 border-slate-200 hover:bg-slate-50 text-slate-700 text-lg font-bold py-4 rounded-xl transition-colors"
+              >
+                回到首页
+              </button>
+              <button
+                onClick={() => startGame(gameMode)}
+                className="flex-1 flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-lg font-bold py-4 rounded-xl transition-colors shadow-md hover:shadow-lg"
+              >
+                <RefreshCw className="w-5 h-5" /> 再记一遍
+              </button>
+            </div>
           </div>
         )}
       </div>
