@@ -3,7 +3,7 @@ import { Word, vocabulary, getRandomDisclaimerKana, splitKana, categories } from
 import { Target, Trophy, Clock, Zap, RefreshCw, Eye, X, ChevronDown } from 'lucide-react';
 import { motion } from 'motion/react';
 
-type GameState = 'START' | 'PLAYING' | 'GAME_OVER';
+type GameState = 'START' | 'PLAYING';
 type GameMode = 'MODE_1' | 'MODE_2' | 'MODE_3';
 
 export default function App() {
@@ -25,7 +25,6 @@ export default function App() {
   
   // General game state
   const [score, setScore] = useState<number>(0);
-  const [timeLeft, setTimeLeft] = useState<number>(60);
   const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
 
   const getMeaningOptions = (correctMeaning: string) => {
@@ -47,7 +46,6 @@ export default function App() {
     setGameMode(mode);
     setCurrentSubMode(1);
     setScore(0);
-    setTimeLeft(60);
     setGameState('PLAYING');
     nextWordSequence(mode, 1);
   };
@@ -81,17 +79,6 @@ export default function App() {
       setKanaOptions(getRandomDisclaimerKana(targetWord!.kana, Math.max(12, parts.length + 6)));
     }
   };
-
-  useEffect(() => {
-    if (gameState === 'PLAYING') {
-      if (timeLeft > 0) {
-        const timer = setTimeout(() => setTimeLeft((prev) => prev - 1), 1000);
-        return () => clearTimeout(timer);
-      } else {
-        setGameState('GAME_OVER');
-      }
-    }
-  }, [gameState, timeLeft]);
 
   // Mode 1: Check meaning
   const handleMeaningClick = (meaning: string) => {
@@ -250,8 +237,8 @@ export default function App() {
                 </div>
               </div>
               <div className="flex items-center gap-2">
-                <Clock className={`w-5 h-5 ${timeLeft <= 10 ? 'text-red-500 animate-pulse' : 'text-slate-500'}`} />
-                <span className={`text-lg font-bold font-mono ${timeLeft <= 10 ? 'text-red-500' : 'text-slate-700'}`}>00:{timeLeft.toString().padStart(2, '0')}</span>
+                <Target className="w-5 h-5 text-indigo-500" />
+                <span className="text-lg font-bold">Score: <span className="text-indigo-600">{score}</span></span>
               </div>
             </div>
 
@@ -345,42 +332,6 @@ export default function App() {
               </motion.div>
             )}
 
-          </div>
-        )}
-
-        {gameState === 'GAME_OVER' && (
-          <div className="p-10 text-center">
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              className="mb-8"
-            >
-              <div className="w-24 h-24 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Trophy className="w-12 h-12 text-indigo-600" />
-              </div>
-              <h2 className="text-4xl font-black text-slate-800 mb-2">时间到！</h2>
-              <p className="text-xl text-slate-500">Good Job!</p>
-            </motion.div>
-            
-            <div className="bg-slate-50 rounded-2xl p-8 mb-8 border border-slate-200">
-              <p className="text-sm font-bold text-slate-400 uppercase tracking-widest mb-1">Final Score</p>
-              <p className="text-6xl font-black text-indigo-600 font-mono tracking-tight">{score}</p>
-            </div>
-
-            <div className="flex gap-4">
-              <button
-                onClick={() => setGameState('START')}
-                className="flex-1 bg-white border-2 border-slate-200 hover:bg-slate-50 text-slate-700 text-lg font-bold py-4 rounded-xl transition-colors"
-              >
-                回到首页
-              </button>
-              <button
-                onClick={() => startGame(gameMode)}
-                className="flex-1 flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white text-lg font-bold py-4 rounded-xl transition-colors shadow-md hover:shadow-lg"
-              >
-                <RefreshCw className="w-5 h-5" /> 再来一局
-              </button>
-            </div>
           </div>
         )}
       </div>
