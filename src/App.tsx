@@ -223,19 +223,15 @@ export default function App() {
         {gameState === 'PLAYING' && currentWord && (
           <div className="p-8">
             <div className="flex justify-between items-center mb-8 bg-slate-100 p-4 rounded-xl">
-              <div className="flex items-center gap-4">
-                <button 
-                  onClick={() => setGameState('START')}
-                  className="p-2 -ml-2 rounded-lg hover:bg-slate-200 text-slate-500 transition-colors"
-                  title="退出当前模式"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-                <div className="flex items-center gap-2">
-                  <Target className="w-5 h-5 text-indigo-500" />
-                  <span className="text-lg font-bold">Score: <span className="text-indigo-600">{score}</span></span>
-                </div>
-              </div>
+              <button 
+                onClick={() => setGameState('START')}
+                className="p-2 rounded-lg flex items-center gap-2 hover:bg-slate-200 text-slate-500 transition-colors"
+                title="退出当前模式"
+              >
+                <X className="w-5 h-5" />
+                <span className="font-medium">退出</span>
+              </button>
+              
               <div className="flex items-center gap-2">
                 <Target className="w-5 h-5 text-indigo-500" />
                 <span className="text-lg font-bold">Score: <span className="text-indigo-600">{score}</span></span>
