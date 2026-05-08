@@ -448,6 +448,7 @@ export const abstractWords: Word[] = [
 // ========== 动词 ==========
 export const verbWords: Word[] = [
   // 三类动词
+
   { kanji: 'する', kana: 'する', meaning: '做' },
   { kanji: '来る', kana: 'くる', meaning: '来' },
   
@@ -836,3 +837,31 @@ export function splitKana(wordKana: string): string[] {
   }
   return result;
 }
+
+export const categories = [
+  { name: '全部单词 (All)', words: vocabulary },
+  { name: '时间类 (Time)', words: timeWords },
+  { name: '星期类 (Week)', words: weekWords },
+  { name: '地点/场所类 (Places)', words: placeWords },
+  { name: '人物/称呼类 (People)', words: personWords },
+  { name: '食物/饮料类 (Food/Drinks)', words: foodWords },
+  { name: '颜色类 (Colors)', words: colorWords },
+  { name: '数字/数量/单位 (Numbers)', words: numberWords },
+  { name: '交通工具类 (Transport)', words: transportWords },
+  { name: '学习/办公用品 (Stationery)', words: stationeryWords },
+  { name: '家庭/生活用品 (Household)', words: householdWords },
+  { name: '服装/饰品类 (Clothing)', words: clothingWords },
+  { name: '餐具/厨具类 (Kitchenware)', words: kitchenwareWords },
+  { name: '自然/天气类 (Nature)', words: natureWords },
+  { name: '身体部位类 (Body)', words: bodyWords },
+  { name: '动物类 (Animals)', words: animalWords },
+  { name: '抽象概念/状态类 (Abstract)', words: abstractWords },
+  { name: '动词 (Verbs)', words: verbWords },
+  { name: '形容词 (Adjectives)', words: adjectiveWords },
+  { name: '形容动词 (Na-Adjectives)', words: naAdjectiveWords },
+  { name: '副词 (Adverbs)', words: adverbWords },
+  { name: '感叹词 (Interjections)', words: interjectionWords },
+  { name: '接续词 (Conjunctions)', words: conjunctionWords },
+  { name: '指示词/连体词 (Demonstratives)', words: demonstrativeWords },
+  { name: '其他 (Others)', words: otherWords },
+];

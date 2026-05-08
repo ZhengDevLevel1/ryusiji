@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Word, vocabulary, getRandomDisclaimerKana, splitKana } from './data/vocabulary';
-import { Target, Trophy, Clock, Zap, RefreshCw, Eye, X } from 'lucide-react';
+import { Word, vocabulary, getRandomDisclaimerKana, splitKana, categories } from './data/vocabulary';
+import { Target, Trophy, Clock, Zap, RefreshCw, Eye, X, ChevronDown } from 'lucide-react';
 import { motion } from 'motion/react';
 
 type GameState = 'START' | 'PLAYING' | 'GAME_OVER';
@@ -10,7 +10,7 @@ export default function App() {
   const [gameState, setGameState] = useState<GameState>('START');
   const [gameMode, setGameMode] = useState<GameMode>('MODE_1');
   const [currentSubMode, setCurrentSubMode] = useState<1 | 2>(1);
-  const [playerName, setPlayerName] = useState<string>('');
+  const [selectedCategoryIndex, setSelectedCategoryIndex] = useState<number>(0);
   
   const [currentWord, setCurrentWord] = useState<Word | null>(null);
   
@@ -31,15 +31,19 @@ export default function App() {
   const getMeaningOptions = (correctMeaning: string) => {
     const options = new Set<string>();
     options.add(correctMeaning);
+    const activeWords = categories[selectedCategoryIndex].words;
+    // Check if we have at least 4 unique meanings in the current category
+    const uniqueMeanings = new Set(activeWords.map((w: Word) => w.meaning));
+    const pool = uniqueMeanings.size >= 4 ? activeWords : vocabulary;
+    
     while (options.size < 4) {
-      const randomWord = vocabulary[Math.floor(Math.random() * vocabulary.length)];
+      const randomWord = pool[Math.floor(Math.random() * pool.length)];
       options.add(randomWord.meaning);
     }
     return Array.from(options).sort(() => Math.random() - 0.5);
   };
 
   const startGame = (mode: GameMode) => {
-    if (!playerName.trim()) return;
     setGameMode(mode);
     setCurrentSubMode(1);
     setScore(0);
@@ -49,29 +53,44 @@ export default function App() {
   };
 
   const nextWordSequence = (mode: GameMode, subMode: 1 | 2, word?: Word) => {
-    const targetWord = word || vocabulary[Math.floor(Math.random() * vocabulary.length)];
-    setCurrentWord(targetWord);
+    const activeWords = categories[selectedCategoryIndex].words;
+    // ensure that if a category has very few words, we don't crash
+    const pool = activeWords.length > 0 ? activeWords : vocabulary;
+    
+    let targetWord = word;
+    if (!targetWord) {
+      if (pool.length > 1) {
+        do {
+          targetWord = pool[Math.floor(Math.random() * pool.length)];
+        } while (currentWord && targetWord.kanji === currentWord.kanji && targetWord.kana === currentWord.kana);
+      } else {
+        targetWord = pool[0];
+      }
+    }
+    
+    setCurrentWord(targetWord!);
     setIsCorrect(null);
     setShowHint(false);
     
     if (mode === 'MODE_1' || (mode === 'MODE_3' && subMode === 1)) {
-      setMeaningOptions(getMeaningOptions(targetWord.meaning));
+      setMeaningOptions(getMeaningOptions(targetWord!.meaning));
     } else if (mode === 'MODE_2' || (mode === 'MODE_3' && subMode === 2)) {
-      const parts = splitKana(targetWord.kana);
+      const parts = splitKana(targetWord!.kana);
       setWordKanaParts(parts);
       setSelectedKanas(new Array(parts.length).fill(null));
-      setKanaOptions(getRandomDisclaimerKana(targetWord.kana, 10));
+      setKanaOptions(getRandomDisclaimerKana(targetWord!.kana, Math.max(12, parts.length + 6)));
     }
   };
 
   useEffect(() => {
-    let timer: any;
-    if (gameState === 'PLAYING' && timeLeft > 0) {
-      timer = setInterval(() => setTimeLeft((prev) => prev - 1), 1000);
-    } else if (timeLeft === 0 && gameState === 'PLAYING') {
-      setGameState('GAME_OVER');
+    if (gameState === 'PLAYING') {
+      if (timeLeft > 0) {
+        const timer = setTimeout(() => setTimeLeft((prev) => prev - 1), 1000);
+        return () => clearTimeout(timer);
+      } else {
+        setGameState('GAME_OVER');
+      }
     }
-    return () => clearInterval(timer);
   }, [gameState, timeLeft]);
 
   // Mode 1: Check meaning
@@ -161,15 +180,25 @@ export default function App() {
           <div className="p-8">
             <div className="mb-8">
               <label className="block text-sm font-medium text-slate-700 mb-2">
-                请输入你的大名 (Player Name)
+                选择词汇分类 (Select Category)
               </label>
-              <input
-                type="text"
-                value={playerName}
-                onChange={(e) => setPlayerName(e.target.value)}
-                placeholder="Ex: Sakura"
-                className="w-full px-4 py-3 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all text-lg"
-              />
+              <div className="relative">
+                <select
+                  value={selectedCategoryIndex}
+                  onChange={(e) => setSelectedCategoryIndex(Number(e.target.value))}
+                  className="w-full appearance-none px-4 py-3.5 pr-12 rounded-xl border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all text-base sm:text-lg bg-white shadow-sm cursor-pointer hover:border-slate-400 font-medium text-slate-700 active:bg-slate-50 truncate"
+                  style={{ WebkitAppearance: 'none', MozAppearance: 'none' }}
+                >
+                  {categories.map((cat, idx) => (
+                    <option key={idx} value={idx}>
+                      {cat.name} ({cat.words.length} 词)
+                    </option>
+                  ))}
+                </select>
+                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4 text-slate-400">
+                  <ChevronDown className="w-5 h-5" />
+                </div>
+              </div>
             </div>
             
             <div className="mb-6">
@@ -177,8 +206,7 @@ export default function App() {
               <div className="space-y-3">
                 <button
                   onClick={() => startGame('MODE_1')}
-                  disabled={!playerName.trim()}
-                  className="w-full bg-white hover:bg-indigo-50 active:bg-indigo-100 border-2 border-slate-200 hover:border-indigo-300 disabled:opacity-50 disabled:cursor-not-allowed text-slate-700 text-left px-6 py-4 rounded-xl transition-all shadow-sm"
+                  className="w-full bg-white hover:bg-indigo-50 active:bg-indigo-100 border-2 border-slate-200 hover:border-indigo-300 text-slate-700 text-left px-6 py-4 rounded-xl transition-all shadow-sm"
                 >
                   <div className="font-bold text-lg mb-1">模式一：看日语选中文</div>
                   <div className="text-sm text-slate-500">显示日语单词（假名/汉字），从四个选项中选择正确的中文意思。</div>
@@ -186,8 +214,7 @@ export default function App() {
                 
                 <button
                   onClick={() => startGame('MODE_2')}
-                  disabled={!playerName.trim()}
-                  className="w-full bg-white hover:bg-indigo-50 active:bg-indigo-100 border-2 border-slate-200 hover:border-indigo-300 disabled:opacity-50 disabled:cursor-not-allowed text-slate-700 text-left px-6 py-4 rounded-xl transition-all shadow-sm"
+                  className="w-full bg-white hover:bg-indigo-50 active:bg-indigo-100 border-2 border-slate-200 hover:border-indigo-300 text-slate-700 text-left px-6 py-4 rounded-xl transition-all shadow-sm"
                 >
                   <div className="font-bold text-lg mb-1">模式二：看中文拼假名</div>
                   <div className="text-sm text-slate-500">显示中文和汉字，通过点击下方给出的假名来拼写正确的日语单词，可查看答案。</div>
@@ -195,8 +222,7 @@ export default function App() {
 
                 <button
                   onClick={() => startGame('MODE_3')}
-                  disabled={!playerName.trim()}
-                  className="w-full bg-white hover:bg-indigo-50 active:bg-indigo-100 border-2 border-indigo-400 hover:border-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed text-indigo-900 text-left px-6 py-4 rounded-xl transition-all shadow-sm relative overflow-hidden"
+                  className="w-full bg-white hover:bg-indigo-50 active:bg-indigo-100 border-2 border-indigo-400 hover:border-indigo-500 text-indigo-900 text-left px-6 py-4 rounded-xl transition-all shadow-sm relative overflow-hidden"
                 >
                   <div className="absolute top-0 right-0 bg-indigo-500 text-white text-xs font-bold px-3 py-1 rounded-bl-lg">RECOMMENDED</div>
                   <div className="font-bold text-lg mb-1">模式三：综合挑战</div>
@@ -333,7 +359,7 @@ export default function App() {
                 <Trophy className="w-12 h-12 text-indigo-600" />
               </div>
               <h2 className="text-4xl font-black text-slate-800 mb-2">时间到！</h2>
-              <p className="text-xl text-slate-500">Good Job, {playerName}!</p>
+              <p className="text-xl text-slate-500">Good Job!</p>
             </motion.div>
             
             <div className="bg-slate-50 rounded-2xl p-8 mb-8 border border-slate-200">
