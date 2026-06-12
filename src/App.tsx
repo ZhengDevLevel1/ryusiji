@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 import { Word, vocabulary, getRandomDisclaimerKana, splitKana, categories } from './data/vocabulary';
-import { Target, Trophy, Clock, Zap, RefreshCw, Eye, X, ChevronDown, Volume2 } from 'lucide-react';
+import { Target, Trophy, Clock, Zap, RefreshCw, Eye, X, ChevronDown, Volume2, BookOpen } from 'lucide-react';
 import { motion } from 'motion/react';
 
-type GameState = 'START' | 'PLAYING' | 'GAME_OVER';
+type GameState = 'START' | 'PLAYING' | 'GAME_OVER' | 'BROWSE_ALL';
 type GameMode = 'MODE_1' | 'MODE_2' | 'MODE_3';
 
 export default function App() {
@@ -250,6 +250,13 @@ export default function App() {
                   <div className="font-bold text-lg mb-1">模式三：综合挑战</div>
                   <div className="text-sm text-indigo-600/80">先根据日语选择中文，紧接着再拼写出对应的假名，彻底巩固记忆！</div>
                 </button>
+
+                <button
+                  onClick={() => setGameState('BROWSE_ALL')}
+                  className="w-full mt-2 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 border-2 border-slate-200 text-slate-700 text-left px-6 py-4 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 font-bold text-lg"
+                >
+                  <BookOpen className="w-6 h-6" /> 查看全部词库
+                </button>
               </div>
             </div>
           </div>
@@ -387,6 +394,52 @@ export default function App() {
               </motion.div>
             )}
 
+          </div>
+        )}
+
+        {gameState === 'BROWSE_ALL' && (
+          <div className="flex flex-col h-[80vh]">
+            <div className="p-6 border-b border-slate-100 bg-white rounded-t-2xl flex items-center justify-between sticky top-0 z-10 shrink-0">
+              <h2 className="text-2xl font-bold text-slate-800 flex items-center gap-2">
+                <BookOpen className="w-6 h-6 text-indigo-600" />
+                词汇总览
+              </h2>
+              <button 
+                onClick={() => setGameState('START')}
+                className="p-2 rounded-lg flex items-center gap-2 hover:bg-slate-200 text-slate-500 transition-colors"
+                title="返回"
+              >
+                <X className="w-5 h-5" />
+                <span className="font-medium hidden sm:inline">返回</span>
+              </button>
+            </div>
+            
+            <div className="p-6 overflow-y-auto flex-1 pb-10">
+              {categories.map((cat, idx) => (
+                <div key={idx} className="mb-8 last:mb-0">
+                  <h3 className="text-xl font-bold border-l-4 border-indigo-500 pl-3 mb-4 text-slate-700 bg-slate-50 py-2 rounded-r-lg">
+                    {cat.name} <span className="text-sm font-normal text-slate-500 ml-2">({cat.words.length} 词)</span>
+                  </h3>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pl-1 sm:pl-4">
+                    {cat.words.map((word, wIdx) => (
+                      <div key={wIdx} className="bg-white border border-slate-200 rounded-xl p-4 hover:border-indigo-300 transition-colors shadow-sm flex items-center justify-between">
+                        <div>
+                          <div className="font-bold text-lg mb-1 text-slate-800">{word.kanji !== word.kana ? word.kanji : word.kana}</div>
+                          <div className="text-slate-500 text-sm">【 {word.kana} 】 {word.meaning}</div>
+                        </div>
+                        <button
+                          onClick={() => playAudio(word.kana)}
+                          className="shrink-0 text-slate-400 hover:text-indigo-600 focus:outline-none p-2 hover:bg-slate-100 rounded-full transition-colors"
+                          title="朗读单词"
+                        >
+                          <Volume2 className="w-6 h-6" />
+                        </button>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         )}
 
