@@ -11,6 +11,7 @@ export default function App() {
   const [gameMode, setGameMode] = useState<GameMode>('MODE_1');
   const [currentSubMode, setCurrentSubMode] = useState<1 | 2>(1);
   const [selectedCategoryIndex, setSelectedCategoryIndex] = useState<number>(0);
+  const [browseCategoryIndex, setBrowseCategoryIndex] = useState<number | null>(null);
   
   const [wordPool, setWordPool] = useState<Word[]>([]);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -252,7 +253,10 @@ export default function App() {
                 </button>
 
                 <button
-                  onClick={() => setGameState('BROWSE_ALL')}
+                  onClick={() => {
+                    setGameState('BROWSE_ALL');
+                    setBrowseCategoryIndex(null);
+                  }}
                   className="w-full mt-2 bg-slate-100 hover:bg-slate-200 active:bg-slate-300 border-2 border-slate-200 text-slate-700 text-left px-6 py-4 rounded-xl transition-all shadow-sm flex items-center justify-center gap-2 font-bold text-lg"
                 >
                   <BookOpen className="w-6 h-6" /> 查看全部词库
@@ -415,13 +419,35 @@ export default function App() {
             </div>
             
             <div className="p-6 overflow-y-auto flex-1 pb-10">
-              {categories.map((cat, idx) => (
-                <div key={idx} className="mb-8 last:mb-0">
-                  <h3 className="text-xl font-bold border-l-4 border-indigo-500 pl-3 mb-4 text-slate-700 bg-slate-50 py-2 rounded-r-lg">
-                    {cat.name} <span className="text-sm font-normal text-slate-500 ml-2">({cat.words.length} 词)</span>
-                  </h3>
+              {browseCategoryIndex === null ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {categories.map((cat, idx) => (
+                    <button 
+                      key={idx}
+                      onClick={() => setBrowseCategoryIndex(idx)}
+                      className="bg-white border-2 border-slate-200 hover:border-indigo-400 active:border-indigo-500 rounded-xl p-6 text-left transition-colors shadow-sm"
+                    >
+                      <h3 className="text-xl font-bold text-slate-800 mb-2">{cat.name}</h3>
+                      <p className="text-slate-500 font-medium">{cat.words.length} <span className="text-sm font-normal">词</span></p>
+                    </button>
+                  ))}
+                </div>
+              ) : (
+                <>
+                  <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                    <h3 className="text-xl font-bold border-l-4 border-indigo-500 pl-3 text-slate-700 bg-slate-50 py-2 pr-4 rounded-r-lg inline-block self-start">
+                      {categories[browseCategoryIndex].name} <span className="text-sm font-normal text-slate-500 ml-2">({categories[browseCategoryIndex].words.length} 词)</span>
+                    </h3>
+                    <button 
+                      onClick={() => setBrowseCategoryIndex(null)}
+                      className="text-slate-500 hover:text-indigo-600 bg-slate-100 hover:bg-slate-200 px-4 py-2 rounded-lg font-medium transition-colors"
+                    >
+                      返回分类列表
+                    </button>
+                  </div>
+                  
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pl-1 sm:pl-4">
-                    {cat.words.map((word, wIdx) => (
+                    {categories[browseCategoryIndex].words.map((word, wIdx) => (
                       <div key={wIdx} className="bg-white border border-slate-200 rounded-xl p-4 hover:border-indigo-300 transition-colors shadow-sm flex items-center justify-between">
                         <div>
                           <div className="font-bold text-lg mb-1 text-slate-800">{word.kanji !== word.kana ? word.kanji : word.kana}</div>
@@ -437,8 +463,8 @@ export default function App() {
                       </div>
                     ))}
                   </div>
-                </div>
-              ))}
+                </>
+              )}
             </div>
           </div>
         )}
